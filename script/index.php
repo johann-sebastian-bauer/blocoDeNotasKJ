@@ -4,31 +4,24 @@
  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
-    $sql = "SELECT * FROM users WHERE email = $email";
+    $sql = "SELECT * FROM usuario WHERE email = '$email'";
     $teste = $conn -> query($sql);
 
     if($teste -> num_rows > 0){
 
             $result = mysqli_fetch_array($teste);
             $senhaDb = $result['senha'];
+            $id = $result['id'];
             if($senha == $senhaDb){
-                echo "sucesso";
+                header("notes.php?id=$id");
             }
             else{
                 echo"senha incorreta";
             }
     }
     else{
-        echo "Erro $sql <br/> $conn -> error";
+        echo "usuário não encontrado";
     }
-
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if($user && password_verify($password, $user['password'])) {
-        return $user;
-    }
-    return false;
  }
 ?>
 <html lang="en">
@@ -46,7 +39,7 @@
             <input type="email" name="email" required>
 
             <label for="senha">Nome:</label>
-            <input type="text" name="senha" required>
+            <input type="password" name="senha" required>
 
             <input class="botao" type="submit" value="Entrar">
         </form>
