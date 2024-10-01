@@ -29,6 +29,7 @@ $vueData = vue_data_function($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../styles/notes.css">
 </head>
 <body>
     
@@ -38,14 +39,12 @@ $vueData = vue_data_function($conn);
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
-                <th>&nbsp;</th>
             </tr>
             <a href="editNotes.php">
                 <tr v-for="item in vue_data">
                     <td><h2>{{ item.titulo }}</h2></td>
-                    <td>{{ item.data_criaçao }}</td>
+                    <td>{{ item.data_criaçao.format("DD/MM/YY") }}</td>
                     <td>{{ item.conteudo }}</td>
-                    <td>{{ item.inportante == 0 ? 'sim' : 'nao' }}</td>
                 </tr>
             </a>
             <!-- <tr v-else>
